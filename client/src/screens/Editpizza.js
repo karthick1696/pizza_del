@@ -4,6 +4,7 @@ import { editPizza, getPizzaById } from "../actions/pizzaActions";
 import Error from "../components/Error";
 import Loading from "../components/Loading";
 import Success from "../components/Success";
+
 export default function Editpizza({ match }) {
   const dispatch = useDispatch();
   const [name, setname] = useState("");
@@ -18,41 +19,32 @@ export default function Editpizza({ match }) {
 
   const { pizza, error, loading } = getpizzabyidstate;
 
-  const editpizzastate = useSelector((state) => state.editPizzaReducer)
-  const {editloading , editerror , editsuccess} = editpizzastate;
+  const editpizzastate = useSelector((state) => state.editPizzaReducer);
+  const { editloading, editsuccess } = editpizzastate;
 
   useEffect(() => {
-
-    if(pizza)
-    {
-        if(pizza._id==match.params.pizzaid)
-        {
-            setname(pizza.name)
-            setdescription(pizza.description)
-            setcategory(pizza.category)
-            setsmallprice(pizza.prices[0]['small'])
-            setmediumprice(pizza.prices[0]['medium'])
-            setlargeprice(pizza.prices[0]['large'])
-            setimage(pizza.image)
-        }
-        else{
-            dispatch(getPizzaById(match.params.pizzaid));
-        }
-        
-    }
-    else{
+    if (pizza) {
+      if (pizza._id == match.params.pizzaid) {
+        setname(pizza.name);
+        setdescription(pizza.description);
+        setcategory(pizza.category);
+        setsmallprice(pizza.prices[0]["small"]);
+        setmediumprice(pizza.prices[0]["medium"]);
+        setlargeprice(pizza.prices[0]["large"]);
+        setimage(pizza.image);
+      } else {
         dispatch(getPizzaById(match.params.pizzaid));
+      }
+    } else {
+      dispatch(getPizzaById(match.params.pizzaid));
     }
-
-
-
-  }, [pizza , dispatch]);
+  }, [pizza, dispatch]);
 
   function formHandler(e) {
     e.preventDefault();
 
     const editedpizza = {
-      _id : match.params.pizzaid,
+      _id: match.params.pizzaid,
       name,
       image,
       description,
@@ -64,20 +56,17 @@ export default function Editpizza({ match }) {
       },
     };
 
-    dispatch(editPizza(editedpizza))
+    dispatch(editPizza(editedpizza));
   }
 
   return (
     <div>
-    
-     
-
       <div className="text-left shadow-lg p-3 mb-5 bg-white rounded">
-      <h1>Edit Pizza</h1>
+        <h1>Edit Pizza</h1>
         {loading && <Loading />}
         {error && <Error error="Something went wrong" />}
-        {editsuccess && (<Success success='Pizza details edited successfully'/>)}
-        {editloading && (<Loading />)}
+        {editsuccess && <Success success="Pizza details edited successfully" />}
+        {editloading && <Loading />}
 
         <form onSubmit={formHandler}>
           <input

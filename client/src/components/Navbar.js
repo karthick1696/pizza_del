@@ -7,11 +7,12 @@ export default function Navbar() {
   const { currentUser } = userstate;
   const isAdmin = currentUser?.isAdmin;
   const dispatch = useDispatch();
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg shadow-lg p-3 mb-5 bg-white rounded">
         <a className="navbar-brand" href="/">
-          Hot and Fresh Pizzas
+          Amri's Pizzas
         </a>
         <button
           className="navbar-toggler"
@@ -73,12 +74,13 @@ export default function Navbar() {
                 </a>
               </li>
             )}
-
-            <li className="nav-item">
-              <a className="nav-link" href="/cart">
-                Cart {cartstate.cartItems.length}
-              </a>
-            </li>
+            {cartstate.cartItems.length ? (
+              <li className="nav-item">
+                <a className="nav-link" href="/cart">
+                  Cart {cartstate.cartItems.length}
+                </a>
+              </li>
+            ) : null}
           </ul>
         </div>
       </nav>

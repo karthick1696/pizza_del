@@ -6,6 +6,7 @@ import Checkout from "../components/Checkout";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Redirect } from "react-router-dom";
+
 export default function Cartscreen() {
   AOS.init();
   const [redirect, setRedirect] = useState(false);
@@ -19,7 +20,7 @@ export default function Cartscreen() {
 
   if (success) {
     localStorage.removeItem("cartItems");
-    cartItems.map((item) => {
+    cartItems.forEach((item) => {
       dispatch(deleteFromCart(item));
     });
     setTimeout(() => {
