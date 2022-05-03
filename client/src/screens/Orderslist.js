@@ -29,9 +29,9 @@ export default function Orderslist() {
 
         <tbody>
           {orders &&
-            orders.map((order) => {
+            orders.map((order, idx) => {
               return (
-                <tr>
+                <tr key={`orderRow${idx}`}>
                   <td>{order._id}</td>
                   <td>{order.email}</td>
                   <td>{order.userid}</td>

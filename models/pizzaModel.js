@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const pizzaSchema = mongoose.Schema({
 
     name : {type: String , require},
-    varients : [] ,
+    variants : [] ,
     prices : [] ,
     category : {type: String , require},
     image : {type: String , require},

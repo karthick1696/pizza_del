@@ -36,15 +36,15 @@ export default function Cartscreen() {
         <div className="col-md-6">
           <h2 style={{ fontSize: "40px" }}>My Cart</h2>
 
-          {cartItems.map((item) => {
+          {cartItems.map((item, idx) => {
             return (
-              <div className="flex-container">
+              <div key={`cartItem${idx}`} className="flex-container">
                 <div className="text-left m-1 w-100">
                   <h1>
-                    {item.name} [{item.varient}]
+                    {item.name} [{item.variant}]
                   </h1>
                   <h1>
-                    Price : {item.quantity} * {item.prices[0][item.varient]} ={" "}
+                    Price : {item.quantity} * {item.prices[0][item.variant]} ={" "}
                     {item.price}
                   </h1>
                   <h1 style={{ display: "inline" }}>Quantity : </h1>
@@ -53,7 +53,7 @@ export default function Cartscreen() {
                     aria-hidden="true"
                     onClick={() => {
                       dispatch(
-                        addToCart(item, item.quantity + 1, item.varient)
+                        addToCart(item, item.quantity + 1, item.variant)
                       );
                     }}
                   ></i>
@@ -63,7 +63,7 @@ export default function Cartscreen() {
                     aria-hidden="true"
                     onClick={() => {
                       dispatch(
-                        addToCart(item, item.quantity - 1, item.varient)
+                        addToCart(item, item.quantity - 1, item.variant)
                       );
                     }}
                   ></i>

@@ -24,9 +24,10 @@ export default function Ordersscreen() {
         {loading && <Loading />}
         {error && <Error error="Something went wrong" />}
         {orders &&
-          orders.map((order) => {
+          orders.map((order, idx) => {
             return (
               <div
+                key={`order${idx}`}
                 className="col-md-8 m-2 p-1"
                 data-aos="fade-down"
                 style={{ backgroundColor: "red", color: "white" }}
@@ -35,11 +36,11 @@ export default function Ordersscreen() {
                   <div className="text-left w-100 m-1">
                     <h2 style={{ fontSize: "25px" }}>Items</h2>
                     <hr />
-                    {order.orderItems.map((item) => {
+                    {order.orderItems.map((item, idx) => {
                       return (
-                        <div>
+                        <div key={`$orderItem${idx}`}>
                           <p>
-                            {item.name} [{item.varient}] * {item.quantity} ={" "}
+                            {item.name} [{item.variant}] * {item.quantity} ={" "}
                             {item.price}
                           </p>
                         </div>

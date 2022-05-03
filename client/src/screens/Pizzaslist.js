@@ -14,7 +14,7 @@ export default function Pizzaslist() {
   useEffect(() => {
     dispatch(getAllPizzas());
   }, []);
-  
+
   return (
     <div>
       <h2>Pizzas List</h2>
@@ -32,9 +32,9 @@ export default function Pizzaslist() {
         </thead>
         <tbody>
           {pizzas &&
-            pizzas.map((pizza) => {
+            pizzas.map((pizza, idx) => {
               return (
-                <tr>
+                <tr key={`pizza${idx}`}>
                   <td>{pizza.name}</td>
                   <td>
                     Small : {pizza.prices[0]["small"]} <br />

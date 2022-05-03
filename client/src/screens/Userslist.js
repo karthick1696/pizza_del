@@ -29,9 +29,9 @@ export default function Userslist() {
 
         <tbody>
           {users &&
-            users.map((user) => {
+            users.map((user, idx) => {
               return (
-                <tr>
+                <tr key={`users${idx}`}>
                   <td>{user._id}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
