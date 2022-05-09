@@ -45,6 +45,10 @@ export default function Navbar() {
                 <div
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton"
+                  style={{
+                    right: 0,
+                    left: 'unset'
+                  }}
                 >
                   {isAdmin ? (
                     <li className="nav-item">
