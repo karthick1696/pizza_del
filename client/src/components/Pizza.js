@@ -5,7 +5,8 @@ import { addToCart } from "../actions/cartActions";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-export default function Pizza({ pizza }) {
+export default function Pizza(props) {
+  const { pizza } = props;
   AOS.init({});
 
   const [quantity, setquantity] = useState(1);

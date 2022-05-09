@@ -13,7 +13,9 @@ export default function Filter() {
         <div className="col-md-3 w-100">
           <input
             onChange={(e) => {
-              setsearchkey(e.target.value);
+              const value = e.target.value;
+              dispatch(filterPizzas(value, category));
+              setsearchkey(value);
             }}
             value={searchkey}
             type="text"
@@ -25,14 +27,18 @@ export default function Filter() {
           <select
             className="form-control w-100 mt-2"
             value={category}
-            onChange={(e) => setcategory(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              dispatch(filterPizzas(searchkey, value));
+              setcategory(value);
+            }}
           >
             <option value="all">All</option>
             <option value="veg">Veg</option>
             <option value="nonveg">Non Veg</option>
           </select>
         </div>
-        <div className="col-md-3 w-100">
+        {/* <div className="col-md-3 w-100">
           <button
             className="btn w-100 mt-2"
             onClick={() => {
@@ -41,7 +47,7 @@ export default function Filter() {
           >
             FILTER
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

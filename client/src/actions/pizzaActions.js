@@ -35,7 +35,7 @@ export const filterPizzas = (searchkey, category) => async (dispatch) => {
     );
 
     if (category != "all") {
-      filteredPizzas = response.data.filter(
+      filteredPizzas = filteredPizzas.filter(
         (pizza) => pizza.category.toLowerCase() == category
       );
     }
