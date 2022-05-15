@@ -50,8 +50,8 @@ export const addPizzaReducer = (state = {}, action) => {
   switch (action.type) {
     case "ADD_PIZZA_REQUEST":
       return {
-        loading: true,
         ...state,
+        loading: true,
       };
     case "ADD_PIZZA_SUCCESS":
       toast.success(action.payload || 'Pizza added successfully');
@@ -74,8 +74,8 @@ export const deletePizzaReducer = (state = {}, action) => {
   switch (action.type) {
     case "DELETE_PIZZA_REQUEST":
       return {
-        loading: true,
         ...state,
+        loading: true,
       };
     case "DELETE_PIZZA_SUCCESS":
       toast.success(action.payload || 'Pizza deleted successfully');
@@ -98,8 +98,8 @@ export const editPizzaReducer = (state = {}, action) => {
   switch (action.type) {
     case "EDIT_PIZZA_REQUEST":
       return {
-        editloading: true,
         ...state,
+        editloading: true,
       };
     case "EDIT_PIZZA_SUCCESS":
       toast.success(action.payload || 'Pizza updated successfully');

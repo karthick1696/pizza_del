@@ -70,3 +70,27 @@ export const getAllUsersReducer = (state = { users: [] }, action) => {
       return state;
   }
 };
+
+export const deleteUserReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "DELETE_USER_REQUEST":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "DELETE_USER_SUCCESS":
+      toast.success(action.payload || 'User deleted successfully');
+      action.callback && setTimeout(action.callback);
+      return {
+        loading: false,
+      };
+    case "DELETE_USER_FAILED":
+      const message = action?.payload?.response?.data || 'Failed to add user';
+      toast.error(message);
+      return {
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};

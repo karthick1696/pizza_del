@@ -8,7 +8,9 @@ import { deleteUser, getAllUsers } from "../actions/userActions";
 export default function Userslist() {
   const dispatch = useDispatch();
   const usersstate = useSelector((state) => state.getAllUsersReducer);
+  const loginState = useSelector((state) => state.loginUserReducer);
   const { error, loading, users } = usersstate;
+  const { currentUser } = loginState;
   useEffect(() => {
     dispatch(getAllUsers());
   }, []);
@@ -30,18 +32,23 @@ export default function Userslist() {
         <tbody>
           {users &&
             users.map((user, idx) => {
+              const isActiveUser = user?._id === currentUser?._id
               return (
                 <tr key={`users${idx}`}>
                   <td>{user._id}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
-                    <i
-                      className="fa fa-trash"
-                      onClick={() => {
-                        dispatch(deleteUser(user._id));
-                      }}
-                    ></i>
+                    {
+                      !isActiveUser ? (
+                        <i
+                          className="fa fa-trash"
+                          onClick={() => {
+                            dispatch(deleteUser(user._id));
+                          }}
+                        ></i>
+                      ) : null
+                    }
                   </td>
                 </tr>
               );

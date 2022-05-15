@@ -66,9 +66,9 @@ router.post("/deleteuser", async(req, res) => {
 
     try {
         await User.findOneAndDelete({_id : userid})
-        res.send('User Deleted Successfully')
+        res.send('User deleted Successfully')
     } catch (error) {
-        return res.status(400).json({ message: error });
+        return res.status(400).json('Failed to delete user');
     }
 
 });

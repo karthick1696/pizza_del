@@ -43,12 +43,12 @@ export const getAllUsers = () => async (dispatch) => {
 };
 
 export const deleteUser = (userid) => async (dispatch) => {
+  dispatch({ type: "DELETE_USER_REQUEST" });
   try {
-    await axios.post("/api/users/deleteuser", { userid });
-    alert("User deleted successfully");
-    window.location.reload();
+    const response = await axios.post("/api/users/deleteuser", { userid });
+    console.log(response);
+    dispatch({ type: "DELETE_USER_SUCCESS", payload: response.data, callback: () => dispatch(getAllUsers()) });
   } catch (error) {
-    alert("Something went wrong");
-    console.log(error);
+    dispatch({ type: "DELETE_USER_FAILED", payload: error });
   }
 };
