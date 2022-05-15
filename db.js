@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  "mongodb+srv://karthickraja:Kr9551881151@pizzacluster.9sqzj.mongodb.net/pizzaDbase"
+  "mongodb+srv://Amritha:Amritha25@pizza-cluster.nkn9p.mongodb.net/pizza-db"
   , { useUnifiedTopology: true, useNewUrlParser: true }
 );
 
