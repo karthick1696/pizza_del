@@ -14,24 +14,26 @@ router.get("/getallpizzas", async(req, res) => {
 });
 
 router.post("/addpizza", async(req, res) => {
-
-    const pizza = req.body.pizza
+    const pizza = req.body || {};
 
    try {
+       const existingPizza = await Pizza.findOne({name: pizza.name, category: pizza.category});
+       if (existingPizza) {
+        return res.status(400).json(`${existingPizza?.name || 'Pizza'} already added`);
+       }
     const newpizza = new Pizza({
-        name : pizza.name,
-        image :pizza.image,
+        name: pizza.name,
+        image: pizza.image,
         variants : ['small','medium','large'],
         description : pizza.description,
         category : pizza.category,
         prices : [pizza.prices]
     })
-    await newpizza.save()
-    res.send('New Pizza Added Successfully')
+    await newpizza.save();
+    res.send('Pizza added successfully')
    } catch (error) {
-       return res.status(400).json({ message: error });
+       return res.status(400).json("Failed to add pizza");
    }
-  
 });
 
 router.post("/getpizzabyid", async(req, res) => {

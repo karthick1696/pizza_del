@@ -8,14 +8,12 @@ router.post("/register", async(req, res) => {
     const newUser = new User({name , email , password})
     
     try {
-        await User.findOne({ email }, (err, doc) => {
-            if (doc) {
-                return res.status(400).json("Email already registered");
-            } else {
-                newUser.save();
-                res.send('User Registered successfully');
-            }
-        });
+        const user = await User.findOne({ email });
+        if (user) {
+            return res.status(400).json("Email already registered");
+        }
+        newUser.save();
+        res.send('User Registered successfully');
     } catch (error) {
         return res.status(400).json("User registration failed");
     }

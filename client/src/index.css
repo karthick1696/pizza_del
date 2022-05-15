@@ -37,7 +37,7 @@ h1 {
 
 select {
   box-shadow: none !important;
-  border-color: black !important;
+  border-color: black;
 }
 
 .fa-plus {

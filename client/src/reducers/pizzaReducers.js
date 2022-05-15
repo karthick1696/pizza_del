@@ -1,3 +1,6 @@
+import { toast } from "react-toastify";
+import history from "../history";
+
 export const getAllPizzasReducer = (state = { pizzas: [] }, action) => {
   switch (action.type) {
     case "GET_PIZZAS_REQUEST":
@@ -11,7 +14,7 @@ export const getAllPizzasReducer = (state = { pizzas: [] }, action) => {
         pizzas: action.payload,
       };
     case "GET_PIZZAS_FAILED":
-      return {
+      return { 
         error: action.payload,
         loading: false,
       };
@@ -50,13 +53,15 @@ export const addPizzaReducer = (state = {}, action) => {
         ...state,
       };
     case "ADD_PIZZA_SUCCESS":
+      toast.success(action.payload || 'Pizza added successfully');
+      setTimeout(() => history.push('/admin/pizzaslist'));
       return {
         loading: false,
-        success: true,
       };
     case "ADD_PIZZA_FAILED":
+      const message = action?.payload?.response?.data || 'Failed to add pizza';
+      toast.error(message);
       return {
-        error: action.payload,
         loading: false,
       };
     default:
