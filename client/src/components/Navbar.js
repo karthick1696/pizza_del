@@ -1,13 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import { logoutUser } from "../actions/userActions";
-export default function Navbar() {
+const Navbar = (props) => {
   const cartstate = useSelector((state) => state.cartReducer);
   const userstate = useSelector((state) => state.loginUserReducer);
   const { currentUser } = userstate;
   const isAdmin = currentUser?.isAdmin;
   const dispatch = useDispatch();
+  const pathname = props?.location?.pathname || '';
 
   return (
     <div>
@@ -29,6 +30,26 @@ export default function Navbar() {
           </span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav mr-auto">
+            {
+              isAdmin ? (
+                <Link
+                  style={{
+                    textDecoration: pathname.includes('/admin') ? 'underline' : 'none'
+                  }}
+                  className="nav-item active" to="/admin">
+                  <a className="nav-link">Dashboard</a>
+                </Link>
+              ) : null
+            }
+            <Link
+              style={{
+                textDecoration: pathname === '/orders' ? 'underline' : 'none'
+              }}
+              className="nav-item" to="/orders">
+              <a className="nav-link">Orders</a>
+            </Link>
+          </ul>
           <ul className="navbar-nav ml-auto">
             {currentUser ? (
               <div className="dropdown mt-2">
@@ -51,16 +72,6 @@ export default function Navbar() {
                     left: 'unset'
                   }}
                 >
-                  {isAdmin ? (
-                    <li className="nav-item">
-                      <a className="dropdown-item" href="/admin">
-                        Dashboard
-                      </a>
-                    </li>
-                  ) : null}
-                  <a className="dropdown-item" href="/orders">
-                    Orders
-                  </a>
                   <a
                     className="dropdown-item"
                     href="#"
@@ -92,3 +103,5 @@ export default function Navbar() {
     </div>
   );
 }
+
+export default withRouter(Navbar);
