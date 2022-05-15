@@ -15,7 +15,6 @@ router.get("/getallpizzas", async(req, res) => {
 
 router.post("/addpizza", async(req, res) => {
     const pizza = req.body || {};
-
    try {
        const existingPizza = await Pizza.findOne({name: pizza.name, category: pizza.category});
        if (existingPizza) {
@@ -64,25 +63,23 @@ router.post("/editpizza", async(req, res) => {
 
         await pizza.save()
 
-        res.send('Pizza Details Edited successfully')
+        res.send('Pizza updated successfully')
 
     } catch (error) {
-        return res.status(400).json({ message: error });
+        return res.status(400).json('Failed to update pizza');
     }
   
 });
 
 router.post("/deletepizza", async(req, res) => {
-
-    const pizzaid = req.body.pizzaid
+    const pizzaid = req.body.pizzaid;
 
   try {
     await Pizza.findOneAndDelete({_id : pizzaid})
-    res.send('Pizza Deleted successfully')
+    res.send('Pizza deleted successfully')
   } catch (error) {
-      return res.status(400).json({ message: error });
+    return res.status(400).json('Failed to delete pizza');
   }
-  
 });
 
 

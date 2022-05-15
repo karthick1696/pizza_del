@@ -27,7 +27,7 @@ export default function Addpizza() {
           case !value:
             fieldErrors[name] = 'Required';
             break;
-          case /[^A-Za-z0-9]/.test(value):
+          case /[^A-Za-z0-9\s]/.test(value):
             fieldErrors[name] = 'Should not contain special characters';
             break;
           case `${value}`.length <= 3:
@@ -89,14 +89,14 @@ export default function Addpizza() {
     e.preventDefault();
 
     const pizza = {
-      name,
-      image,
-      description,
-      category,
+      name: name.trim(),
+      image: image.trim(),
+      description: description.trim(),
+      category: category.trim(),
       prices: {
-        small: smallprice,
-        medium: mediumprice,
-        large: largeprice,
+        small: Number(smallprice),
+        medium: Number(mediumprice),
+        large: Number(largeprice),
       },
     };
 

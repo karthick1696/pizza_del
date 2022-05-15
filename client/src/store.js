@@ -8,6 +8,7 @@ import {
   addPizzaReducer,
   getPizzaByIdReducer,
   editPizzaReducer,
+  deletePizzaReducer
 } from "./reducers/pizzaReducers";
 import { cartReducer } from "./reducers/cartReducer";
 import {
@@ -29,6 +30,7 @@ const finalReducer = combineReducers({
   placeOrderReducer: placeOrderReducer,
   getUserOrdersReducer: getUserOrdersReducer,
   addPizzaReducer: addPizzaReducer,
+  deletePizzaReducer: deletePizzaReducer,
   getPizzaByIdReducer: getPizzaByIdReducer,
   editPizzaReducer: editPizzaReducer,
   getAllOrdersReducer: getAllOrdersReducer,

@@ -25,9 +25,9 @@ export default function Registerscreen() {
       return;
     }
     const user = {
-      name,
-      email,
-      password,
+      name: name.trim(),
+      email: email.trim(),
+      password: password.trim(),
     };
     dispatch(registerUser(user));
   }
@@ -40,7 +40,7 @@ export default function Registerscreen() {
           case !value:
             fieldErrors['name'] = 'Required';
             break;
-          case /[^A-Za-z0-9]/.test(value):
+          case /[^A-Za-z0-9\s]/.test(value):
             fieldErrors['name'] = 'Should not contain special characters';
             break;
           case `${value}`.length <= 3:

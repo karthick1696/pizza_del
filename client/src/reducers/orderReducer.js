@@ -23,8 +23,8 @@ export const getUserOrdersReducer = (state = { oredrs: [] }, action) => {
   switch (action.type) {
     case "GET_USER_ORDERS_REQUEST":
       return {
-        loading: true,
         ...state,
+        loading: true,
       };
     case "GET_USER_ORDERS_SUCCESS":
       return {
@@ -45,8 +45,8 @@ export const getAllOrdersReducer = (state = { oredrs: [] }, action) => {
   switch (action.type) {
     case "GET_ALLORDERS_REQUEST":
       return {
-        loading: true,
         ...state,
+        loading: true,
       };
     case "GET_ALLORDERS_SUCCESS":
       return {

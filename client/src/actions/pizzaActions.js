@@ -61,21 +61,19 @@ export const editPizza = (editedpizza) => async (dispatch) => {
   try {
     const response = await axios.post("/api/pizzas/editpizza", { editedpizza });
     console.log(response);
-    dispatch({ type: "EDIT_PIZZA_SUCCESS" });
-    window.location.href = "/admin/pizzaslist";
+    dispatch({ type: "EDIT_PIZZA_SUCCESS", payload: response.data });
   } catch (error) {
     dispatch({ type: "EDIT_PIZZA_FAILED", payload: error });
   }
 };
 
 export const deletePizza = (pizzaid) => async (dispatch) => {
+  dispatch({ type: "DELETE_PIZZA_REQUEST" });
   try {
     const response = await axios.post("/api/pizzas/deletepizza", { pizzaid });
-    alert("Pizza Deleted Successfully");
     console.log(response);
-    window.location.reload();
+    dispatch({ type: "DELETE_PIZZA_SUCCESS", payload: response.data, callback: () => dispatch(getAllPizzas()) });
   } catch (error) {
-    alert("Something went wrong");
-    console.log(error);
+    dispatch({ type: "DELETE_PIZZA_FAILED", payload: error });
   }
 };
