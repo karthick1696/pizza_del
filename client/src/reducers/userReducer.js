@@ -1,3 +1,6 @@
+import { toast } from 'react-toastify';
+import history from '../history';
+
 export const registerUserReducer = (state = {}, action) => {
   switch (action.type) {
     case "USER_REGISTER_REQUEST":
@@ -7,12 +10,10 @@ export const registerUserReducer = (state = {}, action) => {
     case "USER_REGISTER_SUCCESS":
       return {
         loading: false,
-        success: true,
       };
     case "USER_REGISTER_FAILED":
       return {
         loading: false,
-        error: action.payload,
       };
     default:
       return state;
@@ -26,21 +27,17 @@ export const loginUserReducer = (state = {}, action) => {
         loading: true,
       };
     case "USER_LOGIN_SUCCESS":
+      const name = action?.payload?.name || '';
+      toast.success(`Successfully signed in${name ? ` as ${name}` : ''}`);
+      setTimeout(() => history.push('/'));
       return {
         loading: false,
-        success: true,
         currentUser: action.payload,
       };
     case "USER_LOGIN_FAILED":
+      toast.error("Invalid Credentials");
       return {
         loading: false,
-        error: action.payload,
-      };
-    case "REMOVE_LOGIN_BANNERS":
-      return {
-        loading: false,
-        success: false,
-        error: false,
       };
     default:
       return state;

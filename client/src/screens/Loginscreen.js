@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom';
 import { loginUser } from "../actions/userActions";
-import Error from "../components/Error";
 import ErrorText from "../components/ErrorText";
 import Loading from "../components/Loading";
 
@@ -13,23 +12,10 @@ export default function Loginscreen() {
   const [password, setpassword] = useState("");
   const [errors, setErrors] = useState({});
   const loginstate = useSelector((state) => state.loginUserReducer);
-  const { loading, error, success } = loginstate;
+  const { loading } = loginstate;
   const dispatch = useDispatch();
 
-  const isLoginDisabled = email && password && !errors['email'] && !errors['password'] && !error && !success;
-
-  useEffect(() => {
-    if (localStorage.getItem("currentUser")) {
-      window.location.href = "/";
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!success && !error) {
-      return;
-    }
-    setTimeout(() => dispatch({type: "REMOVE_LOGIN_BANNERS"}), 2000);
-  }, [success, error]);
+  const isLoginDisabled = email && password && !errors['email'] && !errors['password'];
 
   function login() {
     if (!isLoginDisabled) {
@@ -66,7 +52,6 @@ export default function Loginscreen() {
     <div className="login">
       <div className="row justify-content-center mt-5">
         <div className="col-md-5 mt-5 text-left shadow-lg p-3 mb-5 bg-white rounded">
-          {error && <Error error="Invalid Credentials" />}
           <h2 className="text-center m-2" style={{ fontSize: "35px" }}>
             Login
           </h2>
