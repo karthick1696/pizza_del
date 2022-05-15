@@ -15,6 +15,7 @@ import {
   loginUserReducer,
   registerUserReducer,
   getAllUsersReducer,
+  deleteUserReducer
 } from "./reducers/userReducer";
 import {
   placeOrderReducer,
@@ -29,6 +30,7 @@ const finalReducer = combineReducers({
   loginUserReducer: loginUserReducer,
   placeOrderReducer: placeOrderReducer,
   getUserOrdersReducer: getUserOrdersReducer,
+  deleteUserReducer: deleteUserReducer,
   addPizzaReducer: addPizzaReducer,
   deletePizzaReducer: deletePizzaReducer,
   getPizzaByIdReducer: getPizzaByIdReducer,
