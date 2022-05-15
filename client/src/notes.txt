@@ -1,0 +1,9 @@
+React:
+======
+
+not a framework like angular, just a view library.
+Follows a Tree structural component hierarchy (parent - child)
+state, props
+state management - redux (store) [Provider, Store]
+redux flow:
+component => actions => reducers (reducer will change the data present in the store)
