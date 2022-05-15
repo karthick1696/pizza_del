@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { placeOrder } from "../actions/orderActions";
@@ -33,7 +34,9 @@ export default function Checkout({ subtotal }) {
           <button className="btn">Pay Now</button>
         </StripeCheckout>
       ) : (
-        <button className="btn">Login to Pay</button>
+        <Link to="login">
+          <button className="btn">Login to Pay</button>
+        </Link>
       )}
     </div>
   );

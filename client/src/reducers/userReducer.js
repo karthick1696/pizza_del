@@ -36,6 +36,12 @@ export const loginUserReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
+    case "REMOVE_LOGIN_BANNERS":
+      return {
+        loading: false,
+        success: false,
+        error: false,
+      };
     default:
       return state;
   }

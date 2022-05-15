@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../actions/cartActions";
 import { deleteFromCart } from "../actions/cartActions";
@@ -7,7 +7,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { Redirect } from "react-router-dom";
 
-export default function Cartscreen() {
+export default function Cartscreen({history}) {
   AOS.init();
   const [redirect, setRedirect] = useState(false);
   const cartstate = useSelector((state) => state.cartReducer);
@@ -17,6 +17,13 @@ export default function Cartscreen() {
 
   const orderstate = useSelector((state) => state.placeOrderReducer);
   const { success } = orderstate;
+
+  useEffect(() => {
+    if (cartItems?.length) {
+      return;
+    }
+    history.push('/')
+  }, [cartItems])
 
   if (success) {
     localStorage.removeItem("cartItems");

@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import {Link} from 'react-router-dom';
 import { logoutUser } from "../actions/userActions";
 export default function Navbar() {
   const cartstate = useSelector((state) => state.cartReducer);
@@ -11,9 +12,9 @@ export default function Navbar() {
   return (
     <div>
       <nav className="navbar navbar-expand-lg shadow-lg p-3 mb-5 bg-white rounded">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/">
           Amri's Pizzas
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -73,16 +74,16 @@ export default function Navbar() {
               </div>
             ) : (
               <li className="nav-item">
-                <a className="nav-link" href="/login">
-                  Login
-                </a>
+                <Link className="nav-link" to="login">
+                    Login
+                </Link>
               </li>
             )}
             {cartstate.cartItems.length ? (
               <li className="nav-item">
-                <a className="nav-link" href="/cart">
+                <Link className="nav-link" to="cart">
                   Cart {cartstate.cartItems.length}
-                </a>
+                </Link>
               </li>
             ) : null}
           </ul>
