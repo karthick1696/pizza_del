@@ -31,6 +31,8 @@ function App() {
             newestOnTop={false}
             closeOnClick
             rtl={false}
+            pauseOnHover={false}
+            pauseOnFocusLoss={false}
           />
         </div>
       </Router>

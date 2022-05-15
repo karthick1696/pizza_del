@@ -8,10 +8,14 @@ export const registerUserReducer = (state = {}, action) => {
         loading: true,
       };
     case "USER_REGISTER_SUCCESS":
+      toast.success(action.payload || 'User registered successfully');
+      setTimeout(() => history.push('/login'));
       return {
         loading: false,
       };
     case "USER_REGISTER_FAILED":
+      const message = action?.payload?.response?.data || 'User registration failed';
+      toast.error(message);
       return {
         loading: false,
       };
@@ -35,7 +39,8 @@ export const loginUserReducer = (state = {}, action) => {
         currentUser: action.payload,
       };
     case "USER_LOGIN_FAILED":
-      toast.error("Invalid Credentials");
+      const message = action?.payload?.response?.data || 'User login failed';
+      toast.error(message);
       return {
         loading: false,
       };

@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import {Link} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../actions/userActions";
-import Error from "../components/Error";
 import ErrorText from "../components/ErrorText";
 import Loading from "../components/Loading";
-import Success from "../components/Success";
 import { VALID_EMAIL_REGEX } from "./Loginscreen";
 
 export const VALID_PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;;
@@ -17,7 +15,7 @@ export default function Registerscreen() {
   const [cpassword, setcpassword] = useState("");
   const [errors, setErrors] = useState({});
   const registerstate = useSelector((state) => state.registerUserReducer);
-  const { error, loading, success } = registerstate;
+  const { loading } = registerstate;
   const dispatch = useDispatch();
 
   const isRegisterDisabled = name && email && password && cpassword && !errors['email'] && !errors['password'] && !errors['cpassword'] && !errors['name'];
@@ -113,9 +111,6 @@ export default function Registerscreen() {
     <div className="register">
       <div className="row justify-content-center mt-5">
         <div className="col-md-5 mt-5 text-left shadow-lg p-3 mb-5 bg-white rounded">
-          {success && <Success success="User Registered Successfully" />}
-          {error && <Error error="Email already registred" />}
-
           <h2 className="text-center m-2" style={{ fontSize: "35px" }}>
             Register
           </h2>
