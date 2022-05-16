@@ -27,19 +27,13 @@ export const getPizzaById = (pizzaid) => async (dispatch) => {
 export const filterPizzas = (searchkey, category) => async (dispatch) => {
   dispatch({ type: "GET_PIZZAS_REQUEST" });
 
-  try {
-    var filteredPizzas;
-    const response = await axios.get("/api/pizzas/getallpizzas");
-    filteredPizzas = response.data.filter((pizza) =>
-      pizza.name.toLowerCase().includes(searchkey)
-    );
+  if (category === 'all') {
+    category = '';
+  }
 
-    if (category != "all") {
-      filteredPizzas = filteredPizzas.filter(
-        (pizza) => pizza.category.toLowerCase() == category
-      );
-    }
-    dispatch({ type: "GET_PIZZAS_SUCCESS", payload: filteredPizzas });
+  try {
+    const response = await axios.get(`/api/pizzas/getallpizzas${(searchkey || category) ? `?search=${searchkey || ''}&category=${category || ''}` : ''}`);
+    dispatch({ type: "GET_PIZZAS_SUCCESS", payload: response.data });
   } catch (error) {
     dispatch({ type: "GET_PIZZAS_FAILED", payload: error });
   }

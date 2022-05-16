@@ -3,10 +3,18 @@ const router = express.Router();
 const Pizza = require('../models/pizzaModel')
 
 router.get("/getallpizzas", async(req, res) => {
-  
     try {
+        const {search = '', category = ''} = req.query;
         const pizzas = await Pizza.find({})
-        res.send(pizzas)
+        let filteredPizzas = pizzas;
+        const trimmedSearch=search.trim();
+        if (trimmedSearch) {
+            filteredPizzas = filteredPizzas.filter(pizza => pizza?.name?.toLowerCase().includes(trimmedSearch.toLowerCase()))
+        }
+        if (category) {
+            filteredPizzas = filteredPizzas.filter(pizza => pizza?.category === category);
+        }
+        res.send(filteredPizzas)
     } catch (error) {
         return res.status(400).json({ message: error });
     }
